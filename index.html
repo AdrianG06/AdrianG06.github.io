@@ -13,15 +13,12 @@
         <div class="d-flex justify-content-center align-items-center" style="height: vh-100;">
             <div class="card col-12 col-md-6 col-lg-4 bg-light text-white p-4 p-md-5 rounded-4 shadow align-items-center" style="width:90%; max-width: 470px; margin: 100px; background: linear-gradient(135deg, #3789d1, #79548a);">
                 <div class="d-flex justify-content-between align-items-center">
-                    <input type="text" class="form-control border border-0 outline-0  text-muted p-3 rounded-pill flex-grow me-3 fs-5 " style="height:40px"placeholder="Enter a city name" id="cityInput">
+                    <input type="text" class="form-control border border-0 outline-0  text-muted p-3 rounded-pill flex-grow me-3 fs-5 " style="height:40px" placeholder="Enter a city name" id="cityInput" aria-label="Enter a city in the input box">
                     <button type="button" class="btn btn-primary border border-0 outline-0 rounded-pill p-2 " style="height:40px; width: 100px;" id="btnSearch" >Search</button>
                 </div>
                 <div id="weatherInfo" class="text-center mb-3">
-
                 </div>
             </div>
-            
-
         </div>
    </div>
 
@@ -59,8 +56,6 @@
 
         function getWeatherData(latitude, longitude) {
             const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,is_day,wind_speed_10m&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch`;
-            
-    
             
             fetch(apiUrl)
             
@@ -104,7 +99,7 @@
 
             
             weatherInfoDiv.innerHTML = `
-                <h1 class=mt-2>Current Weather</h1>
+                <h1 class = mt-2>Current Weather</h1>
                 <div class="row">
                     <div class="col-6 border-end border-bottom">
                         <h4>${tempIcon} Temperature: ${weatherInfo.temperature_2m} °F</h4>
