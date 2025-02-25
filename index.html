@@ -24,10 +24,12 @@
 
         </div>
    </div>
-   
+
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
    <script>
      document.getElementById('btnSearch').addEventListener('click', function() {
             const city = document.getElementById('cityInput').value;
+            let strMessage = ''
             if (city) {
                 // Use a geocoding API to get the latitude and longitude for the city
                 fetch(`https://nominatim.openstreetmap.org/search?city=${city}&format=json`)
@@ -38,18 +40,27 @@
                             const longitude = data[0].lon;
                             getWeatherData(latitude, longitude);
                         } else {
-                            alert('City not found');
+                            Swal.fire({
+                                title: "Plesae enter a valid city name",
+                                html: strMessage,
+                                icon: "error"
+                            });
                         }
                     })
                     .catch(error => console.error('Error fetching geocoding data:', error));
             } else {
-                alert('Please enter a city name');
+                Swal.fire({
+                    title: "Plesae enter a city name",
+                    html: strMessage,
+                    icon: "error"
+                });
             }
         });
 
         function getWeatherData(latitude, longitude) {
             const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,is_day,wind_speed_10m&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch`;
-        
+            
+    
             
             fetch(apiUrl)
             
@@ -105,7 +116,7 @@
                     
                    
                     <div class="col-6 border-end">
-                        <h4 class= mt-2>${windIcon} Wind Speed: ${weatherInfo.wind_speed_10m} mph</h4
+                        <h4 class=mt-2>${windIcon} Wind Speed: ${weatherInfo.wind_speed_10m} mph</h4
                     ></div>
 
                     <div class="col-6">
